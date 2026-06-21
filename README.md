@@ -9,6 +9,10 @@ with Function Calling. The chat "brain" is a single, stateless, interface-agnost
 The bot is **read-only**: it only reads FAQ/order data and never mutates state, so it
 cannot cancel orders or issue refunds. See the design docs for the reasoning.
 
+## Demo
+
+![Demo of the web chat UI](demo.gif)
+
 ## Quick start
 
 ```bash
