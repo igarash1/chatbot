@@ -1,0 +1,26 @@
+[
+  {
+    "orderId": "1001",
+    "status": "Shipped",
+    "eta": "2026-06-25",
+    "items": ["Wireless Headphones", "USB-C Charging Cable"]
+  },
+  {
+    "orderId": "1002",
+    "status": "Processing",
+    "eta": "2026-06-28",
+    "items": ["Mechanical Keyboard"]
+  },
+  {
+    "orderId": "1003",
+    "status": "Delivered",
+    "eta": "2026-06-18",
+    "items": ["Laptop Stand", "Desk Mat", "Webcam"]
+  },
+  {
+    "orderId": "1004",
+    "status": "Cancelled",
+    "eta": "-",
+    "items": ["Bluetooth Speaker"]
+  }
+]
