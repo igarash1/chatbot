@@ -1,0 +1,42 @@
+[
+  {
+    "question": "How much is shipping?",
+    "answer": "Standard shipping is $5 flat, and free on orders over $50. Express shipping is $15."
+  },
+  {
+    "question": "How long does delivery take?",
+    "answer": "Standard delivery takes 3-5 business days. Express delivery takes 1-2 business days."
+  },
+  {
+    "question": "What is your return policy?",
+    "answer": "You can return unused items within 30 days of delivery for a full refund."
+  },
+  {
+    "question": "How do I return an item?",
+    "answer": "Start a return from the Orders page in your account, print the prepaid label, and drop it off at any carrier location."
+  },
+  {
+    "question": "When will I get my refund?",
+    "answer": "Refunds are issued to your original payment method within 5-7 business days after we receive the returned item."
+  },
+  {
+    "question": "What payment methods do you accept?",
+    "answer": "We accept Visa, Mastercard, American Express, Apple Pay, and Google Pay."
+  },
+  {
+    "question": "Do you ship internationally?",
+    "answer": "Yes, we ship to most countries. International shipping costs and delivery times are shown at checkout."
+  },
+  {
+    "question": "How do I track my order?",
+    "answer": "Once your order ships, we email you a tracking link. You can also ask me for your order status by order number."
+  },
+  {
+    "question": "Can I cancel my order?",
+    "answer": "Orders can be cancelled within 1 hour of placing them from the Orders page. After that, please contact support."
+  },
+  {
+    "question": "How do I contact customer support?",
+    "answer": "You can reach our support team at support@example.com, Monday to Friday, 9am-6pm."
+  }
+]
