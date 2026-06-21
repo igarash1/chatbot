@@ -20,3 +20,7 @@ npm-debug.log*
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# Demo source recording (the optimized demo.gif is committed instead)
+demo.mov
+*.mov
