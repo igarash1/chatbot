@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Support Chat</title>
+    <style>
+      :root {
+        --bg: #f4f5f7;
+        --card: #ffffff;
+        --border: #e3e6ea;
+        --bot: #eef1f5;
+        --user: #2f6fed;
+        --user-text: #ffffff;
+        --muted: #8a93a0;
+        --text: #1c2430;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+      }
+      .chat {
+        display: flex;
+        flex-direction: column;
+        width: min(440px, 94vw);
+        height: min(640px, 92vh);
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow: 0 10px 40px rgba(20, 30, 50, 0.08);
+        overflow: hidden;
+      }
+      .chat header {
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--border);
+        font-weight: 600;
+      }
+      .chat header small { display: block; color: var(--muted); font-weight: 400; margin-top: 2px; }
+      .messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .bubble {
+        max-width: 78%;
+        padding: 9px 13px;
+        border-radius: 14px;
+        line-height: 1.4;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .bubble.bot { align-self: flex-start; background: var(--bot); border-bottom-left-radius: 4px; }
+      .bubble.user { align-self: flex-end; background: var(--user); color: var(--user-text); border-bottom-right-radius: 4px; }
+      .bubble.error { align-self: flex-start; background: #fde8e8; color: #9b1c1c; }
+      .bubble.typing { color: var(--muted); font-style: italic; }
+      form {
+        display: flex;
+        gap: 8px;
+        padding: 12px;
+        border-top: 1px solid var(--border);
+      }
+      input {
+        flex: 1;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 15px;
+        outline: none;
+      }
+      input:focus { border-color: var(--user); }
+      button {
+        padding: 0 16px;
+        border: none;
+        border-radius: 10px;
+        background: var(--user);
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      button:disabled { opacity: 0.5; cursor: default; }
+    </style>
+  </head>
+  <body>
+    <main class="chat">
+      <header>
+        Support Chat
+        <small>Ask about shipping, returns, or your order (e.g. "Where is order 1001?")</small>
+      </header>
+      <div class="messages" id="messages"></div>
+      <form id="form" autocomplete="off">
+        <input id="input" placeholder="Type a message…" aria-label="Message" />
+        <button id="send" type="submit">Send</button>
+      </form>
+    </main>
+    <script src="./chat.js"></script>
+  </body>
+</html>
