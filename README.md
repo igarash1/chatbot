@@ -14,7 +14,9 @@ cannot cancel orders or issue refunds. See the design docs for the reasoning.
 ```bash
 npm install
 cp .env.example .env   # then add your Gemini API key (https://aistudio.google.com/apikey)
-npm run chat           # start the CLI chatbot
+npm run chat           # CLI chatbot
+# — or —
+npm run serve          # web chat UI at http://localhost:3000
 ```
 
 Try: `How much is shipping?`, `Where is order 1001?`, `Where is order 9999?`,
@@ -25,7 +27,8 @@ Try: `How much is shipping?`, `Where is order 1001?`, `Where is order 9999?`,
 | Command | What it does |
 | --- | --- |
 | `npm run chat` | Run the CLI chatbot (needs `GEMINI_API_KEY`). |
-| `npm test` | Run the Vitest suite (tools + chat loop; no API key needed). |
+| `npm run serve` | Run the web chat UI (needs `GEMINI_API_KEY`; `PORT` overrides 3000). |
+| `npm test` | Run the Vitest suite (tools + chat loop + server route; no API key needed). |
 | `npm run typecheck` | Type-check with `tsc --noEmit`. |
 
 Set `GEMINI_MODEL` to override the default model (`gemini-2.5-flash`).
@@ -40,14 +43,18 @@ Set `GEMINI_MODEL` to override the default model (`gemini-2.5-flash`).
   (data or a "not found" marker); wording is the model's job. Both are read-only.
 - **`src/core/gemini.ts`** — adapts the `@google/genai` SDK to the `ModelClient` seam.
 - **`src/core/prompt.ts`** — the system prompt that turns "no facts" into a safe refusal.
-- **`src/cli.ts`** — thin terminal shell over `chat()`. A web UI would replace just this.
+- **`src/cli.ts`** — thin terminal shell over `chat()`.
+- **`src/server.ts`** — Express `createApp(deps, chatFn?)`: one `POST /chat` plus static
+  files. Stateless — the browser holds history and round-trips it each turn. Same `chat()`,
+  same deps as the CLI; the core is untouched.
+- **`public/`** — `index.html` + `chat.js`, a vanilla centered chat page (no build step).
 
 Data lives in `src/data/*.json` (dummy FAQ + orders), separate from code.
 
 ## Status
 
-Phase 1 (CLI core) implemented and tested. Web UI and guardrails are future work; see the
-design docs.
+Phase 1 (CLI core) and Phase 2 (web chat UI) implemented and tested. The EC-site popup
+widget, streaming, and guardrails are future work; see the design docs.
 
 ## Documentation
 
