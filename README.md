@@ -1,4 +1,4 @@
-# chatbot-example
+# chatbot
 
 An automated customer-support chatbot for e-commerce, built as a learning project.
 
