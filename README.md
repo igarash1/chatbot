@@ -37,6 +37,34 @@ Try: `How much is shipping?`, `Where is order 1001?`, `Where is order 9999?`,
 
 Set `GEMINI_MODEL` to override the default model (`gemini-2.5-flash`).
 
+## Architecture
+
+The CLI and web UI are thin shells over one stateless core, `chat()`. Each turn,
+the core loops between the model and the read-only tools until the model produces
+a final text answer (bounded to 5 round-trips), then hands the reply back.
+
+```mermaid
+flowchart TD
+    CLI["src/cli.ts<br/>(terminal)"] --> Chat
+    Web["src/server.ts + public/<br/>(POST /chat)"] --> Chat
+
+    subgraph Core["src/core/chatbot.ts — chat(history, message, deps)"]
+        Chat["conversation loop<br/>(max 5 turns)"]
+    end
+
+    Chat -- "contents[]" --> Model["ModelClient (gemini.ts)<br/>Gemini + Function Calling<br/>+ system prompt"]
+    Model -- "functionCalls[] or final text" --> Chat
+    Chat -- "invokes" --> Tools["tools/<br/>search_faq · get_order_status"]
+    Tools -- "facts only (JSON)" --> Chat
+    Tools -. reads .-> Data["src/data/*.json<br/>(FAQ + orders)"]
+    Chat -- "reply + updated history" --> CLI
+    Chat -- "reply + updated history" --> Web
+```
+
+Data flows one way through the tools — they only ever **read** `src/data/*.json`
+and return facts; the model owns all wording. The caller (CLI or browser) holds
+the history and passes it back each turn, which is what keeps the core stateless.
+
 ## How it works
 
 - **`src/core/chatbot.ts`** — the stateless `chat(history, message, deps)` loop. It calls
